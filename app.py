@@ -6,13 +6,12 @@ import os
 from google.cloud import bigquery
 from google.oauth2 import service_account
 
-
-# Configura el cliente de BigQuery
-#client = bigquery.Client.from_service_account_json('allware-bd-colab.json')
-
-# Cargar credenciales desde el secreto TOML
+# Cargar credenciales desde el secreto GCP_CREDENTIALS
 credentials_info = json.loads(os.getenv("GCP_CREDENTIALS"))
 credentials = service_account.Credentials.from_service_account_info(credentials_info)
+
+# Crear el cliente de BigQuery usando las credenciales
+client = bigquery.Client(credentials=credentials, project=credentials.project_id)
 
 # Crear el cliente de BigQuery usando las credenciales
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)
