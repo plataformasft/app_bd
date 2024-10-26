@@ -1,37 +1,28 @@
 import streamlit as st
 from google.cloud import bigquery
-from datetime import datetime
-import json
-import os
-from google.cloud import bigquery
 from google.oauth2 import service_account
+import os
+import json
 
-# Cargar credenciales desde el secreto GCP_CREDENTIALS
+# Configura las credenciales
 credentials_info = json.loads(os.getenv("GCP_CREDENTIALS"))
 credentials = service_account.Credentials.from_service_account_info(credentials_info)
-
-# Crear el cliente de BigQuery usando las credenciales
 client = bigquery.Client(credentials=credentials, project=credentials.project_id)
 
-# Crear el cliente de BigQuery usando las credenciales
-client = bigquery.Client(credentials=credentials, project=credentials.project_id)
-
-# ID completo de la tabla
+# ID de la tabla
 table_id = "allware-387902.MIA_support_tickets.support_data"
 
-# Función para generar un Ticket ID automáticamente
+# Función para obtener el último Ticket ID y sumarle uno
 def generar_ticket_id():
-    # Consulta el máximo Ticket ID actual en la tabla y añade 1
     query = f"SELECT MAX(`Ticket ID`) as max_id FROM `{table_id}`"
     query_job = client.query(query)
     result = query_job.result()
     max_id = result.to_dataframe()['max_id'][0]
     return (max_id + 1) if max_id is not None else 1
 
-# Título de la aplicación
+# Streamlit UI para crear un nuevo ticket
 st.title("Portal de Solicitudes de Soporte")
 
-# Formulario de solicitud de soporte
 st.subheader("Ingrese su solicitud de soporte")
 nombre = st.text_input("Nombre del cliente")
 email = st.text_input("Correo electrónico")
@@ -66,7 +57,7 @@ if st.button("Enviar solicitud"):
 
         # Verifica si hubo errores
         if errors == []:
-            st.success("Solicitud enviada exitosamente. Su Ticket ID es: {}".format(ticket_id))
+            st.success(f"Solicitud enviada exitosamente. Su Ticket ID es: {ticket_id}")
         else:
             st.error(f"Ocurrió un error al enviar la solicitud: {errors}")
     else:
