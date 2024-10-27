@@ -98,7 +98,7 @@ if st.button("Enviar solicitud"):
             {
                 "Ticket ID": int(ticket_id),  
                 "Customer Name": str(nombre),
-                "Gender": str(genero),
+                "Customer Gender": str(genero),
                 "Customer Email": str(email),
                 "Customer Age": int(edad),
                 "Product Purchased": str(producto),
