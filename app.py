@@ -82,10 +82,10 @@ asuntos = [
     "Cancellation request", "Product compatibility"
 ]
 
-#tipos = [
-#    "Technical issue", "Billing inquiry", "Cancellation request",
-#    "Product inquiry", "Refund request"
-#]
+tipos = [
+    "Technical issue", "Billing inquiry", "Cancellation request",
+    "Product inquiry", "Refund request"
+]
 
 # Mapeo de Ticket Subject a Ticket Priority
 priority_mapping = {
