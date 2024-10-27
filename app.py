@@ -64,7 +64,7 @@ asuntos = ["Soporte técnico", "Consulta de producto", "Devolución", "Otro"]
 generos = ["Masculino", "Femenino", "No especificar"]
 
 # Streamlit UI para crear un nuevo ticket
-st.markdown("<h1 style='display: inline;'>Portal de Solicitudes de Soporte</h1> <img src='imagen.png' style='height: 50px; display: inline;'>", unsafe_allow_html=True)
+st.markdown("<h1 style='display: inline;'>Portal de Solicitudes de Soporte</h1> ", unsafe_allow_html=True)
 
 st.subheader("Ingrese su solicitud de soporte")
 nombre = st.text_input("Nombre del cliente")
