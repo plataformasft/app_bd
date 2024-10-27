@@ -27,7 +27,7 @@ def generar_ticket_id():
 def enviar_correo(ticket_id, nombre, email, producto, asunto, descripcion):
     remitente = "brunodonayredonayre@gmail.com"  # Reemplaza con tu correo
     destinatarios = ["brunodonayredonayre@gmail.com", "plataformas@vitapro.com.pe"]
-    contraseña = "Demian940407430"  # Reemplaza con tu contraseña o contraseña de aplicación
+    contraseña = "sasv krdn fhxs xtow"  # Reemplaza con tu contraseña o contraseña de aplicación
 
     # Configura el mensaje
     mensaje = MIMEMultipart()
