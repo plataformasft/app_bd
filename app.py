@@ -82,18 +82,18 @@ if st.button("Enviar solicitud"):
         # Genera el Ticket ID automáticamente
         ticket_id = generar_ticket_id()
         
-        # Inserta la solicitud en BigQuery
+        # Asegúrate de que los tipos de datos sean correctos
         rows_to_insert = [
             {
-                "Ticket ID": ticket_id,
-                "Customer Name": nombre,
-                "Gender": genero,
-                "Customer Email": email,
-                "Customer Age": edad,
-                "Product Purchased": producto,
-                "Date of Purchase": fecha_compra.strftime("%Y-%m-%d"),
-                "Ticket Subject": asunto,
-                "Ticket Description": descripcion
+                "Ticket ID": int(ticket_id),  # Asegúrate de que sea un entero
+                "Customer Name": str(nombre),  # Convertir a string
+                "Gender": str(genero),  # Convertir a string
+                "Customer Email": str(email),  # Convertir a string
+                "Customer Age": int(edad),  # Asegúrate de que sea un entero
+                "Product Purchased": str(producto),  # Convertir a string
+                "Date of Purchase": fecha_compra.strftime("%Y-%m-%d"),  # Formato de fecha correcto
+                "Ticket Subject": str(asunto),  # Convertir a string
+                "Ticket Description": str(descripcion)  # Convertir a string
             }
         ]
         
@@ -107,5 +107,6 @@ if st.button("Enviar solicitud"):
             st.error(f"Ocurrió un error al enviar la solicitud: {errors}")
     else:
         st.warning("Por favor complete todos los campos requeridos antes de enviar.")
+
 
 
