@@ -82,10 +82,30 @@ asuntos = [
     "Cancellation request", "Product compatibility"
 ]
 
-tipos = [
-    "Technical issue", "Billing inquiry", "Cancellation request",
-    "Product inquiry", "Refund request"
-]
+#tipos = [
+#    "Technical issue", "Billing inquiry", "Cancellation request",
+#    "Product inquiry", "Refund request"
+#]
+
+# Mapeo de Ticket Subject a Ticket Priority
+priority_mapping = {
+    "Hardware issue": "Critical",
+    "Display issue": "Critical",
+    "Product setup": "High",
+    "Network problem": "High",
+    "Data loss": "High",
+    "Refund request": "High",
+    "Battery life": "High",
+    "Cancellation request": "High",
+    "Software bug": "Low",
+    "Product recommendation": "Low",
+    "Delivery problem": "Low",
+    "Peripheral compatibility": "Medium",
+    "Account access": "Medium",
+    "Payment issue": "Medium",
+    "Installation support": "Medium",
+    "Product compatibility": "Medium"
+}
 
 generos = ["Masculino", "Femenino", "No especificar"]
 
@@ -101,14 +121,18 @@ producto = st.selectbox("Producto comprado", productos)
 
 asunto = st.selectbox("Asunto del ticket", asuntos)
 
+# Determinar el Ticket Priority basado en el Ticket Subject seleccionado
+ticket_priority = priority_mapping[asunto]  # Obtiene la prioridad según el asunto seleccionado
+
 # Agregar Ticket Status con valor por defecto
 ticket_status = "Pending Customer Response"  # Valor por defecto para Ticket Status
 st.markdown(f"**Estado del Ticket:** {ticket_status}")  # Mostrar el estado del ticket
 
+# Mostrar el Ticket Priority
+st.markdown(f"**Prioridad del Ticket:** {ticket_priority}")  # Mostrar la prioridad
+
 fecha_compra = st.date_input("Fecha de compra")
 descripcion = st.text_area("Descripción de la solicitud")
-
-
 
 
 # Botón para enviar la solicitud
@@ -141,7 +165,8 @@ if st.button("Enviar solicitud"):
                 "Ticket Subject": str(asunto),
                 "Ticket Type": tipos[0],    # Agregamos el Ticket Type
                 "Ticket Description": str(descripcion) ,
-                "Ticket Status": ticket_status  # Añadir el Ticket Status
+                "Ticket Status": ticket_status,  # Añadir el Ticket Status
+                "Ticket Priority": ticket_priority  # Añadir la prioridad del ticket
 
             }
         ]
