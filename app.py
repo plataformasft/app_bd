@@ -108,3 +108,4 @@ if st.button("Enviar solicitud"):
     else:
         st.warning("Por favor complete todos los campos requeridos antes de enviar.")
 
+
