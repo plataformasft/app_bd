@@ -78,22 +78,33 @@ descripcion = st.text_area("Descripción de la solicitud")
 
 # Botón para enviar la solicitud
 if st.button("Enviar solicitud"):
-    if nombre and email and producto and asunto and descripcion:
+    # Verifica cada campo y muestra un mensaje específico si no está completado
+    if not nombre:
+        st.warning("Por favor, ingrese el nombre del cliente.")
+    elif not email:
+        st.warning("Por favor, ingrese el correo electrónico.")
+    elif not producto:
+        st.warning("Por favor, seleccione un producto comprado.")
+    elif not asunto:
+        st.warning("Por favor, seleccione un asunto del ticket.")
+    elif not descripcion:
+        st.warning("Por favor, ingrese la descripción de la solicitud.")
+    else:
         # Genera el Ticket ID automáticamente
         ticket_id = generar_ticket_id()
         
         # Asegúrate de que los tipos de datos sean correctos
         rows_to_insert = [
             {
-                "Ticket ID": int(ticket_id),  # Asegúrate de que sea un entero
-                "Customer Name": str(nombre),  # Convertir a string
-                "Gender": str(genero),  # Convertir a string
-                "Customer Email": str(email),  # Convertir a string
-                "Customer Age": int(edad),  # Asegúrate de que sea un entero
-                "Product Purchased": str(producto),  # Convertir a string
-                "Date of Purchase": fecha_compra.strftime("%Y-%m-%d"),  # Formato de fecha correcto
-                "Ticket Subject": str(asunto),  # Convertir a string
-                "Ticket Description": str(descripcion)  # Convertir a string
+                "Ticket ID": int(ticket_id),  
+                "Customer Name": str(nombre),
+                "Gender": str(genero),
+                "Customer Email": str(email),
+                "Customer Age": int(edad),
+                "Product Purchased": str(producto),
+                "Date of Purchase": fecha_compra.strftime("%Y-%m-%d"),  
+                "Ticket Subject": str(asunto),
+                "Ticket Description": str(descripcion)  
             }
         ]
         
@@ -105,8 +116,5 @@ if st.button("Enviar solicitud"):
             enviar_correo(ticket_id, nombre, email, producto, asunto, descripcion)
         else:
             st.error(f"Ocurrió un error al enviar la solicitud: {errors}")
-    else:
-        st.warning("Por favor complete todos los campos requeridos antes de enviar.")
-
 
 
