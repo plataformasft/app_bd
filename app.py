@@ -139,7 +139,7 @@ if st.button("Enviar solicitud"):
                 "Product Purchased": str(producto),
                 "Date of Purchase": fecha_compra.strftime("%Y-%m-%d"),  
                 "Ticket Subject": str(asunto),
-                "Ticket Type": str(tipo),  # Agregamos el Ticket Type
+                "Ticket Type": tipos[0],    # Agregamos el Ticket Type
                 "Ticket Description": str(descripcion) ,
                 "Ticket Status": ticket_status  # Añadir el Ticket Status
 
