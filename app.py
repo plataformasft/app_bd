@@ -27,7 +27,7 @@ def generar_ticket_id():
 def enviar_correo(ticket_id, nombre, email, producto, asunto, descripcion):
     remitente = "brunodonayredonayre@gmail.com"  # Reemplaza con tu correo
     destinatarios = ["brunodonayredonayre@gmail.com", "plataformas@vitapro.com.pe"]
-    contraseña = "Demian980733753"  # Reemplaza con tu contraseña o contraseña de aplicación
+    contraseña = "Demian940407430"  # Reemplaza con tu contraseña o contraseña de aplicación
 
     # Configura el mensaje
     mensaje = MIMEMultipart()
@@ -59,8 +59,34 @@ def enviar_correo(ticket_id, nombre, email, producto, asunto, descripcion):
         st.error(f"Error al enviar el correo: {e}")
 
 # Opciones predefinidas
-productos = ["Producto A", "Producto B", "Producto C"]
-asuntos = ["Soporte técnico", "Consulta de producto", "Devolución", "Otro"]
+productos = [
+    "GoPro Hero", "LG Smart TV", "Dell XPS", "Microsoft Office",
+    "Autodesk AutoCAD", "Microsoft Surface", "Philips Hue Lights",
+    "Fitbit Versa Smartwatch", "Dyson Vacuum Cleaner", "Nintendo Switch",
+    "Microsoft Xbox Controller", "Nintendo Switch Pro Controller",
+    "Nest Thermostat", "Sony PlayStation", "GoPro Action Camera",
+    "Xbox", "LG Washing Machine", "Canon EOS", "HP Pavilion",
+    "Amazon Kindle", "Lenovo ThinkPad", "Fitbit Charge", "Adobe Photoshop",
+    "Google Pixel", "Amazon Echo", "PlayStation", "Samsung Galaxy",
+    "iPhone", "LG OLED", "Sony Xperia", "Apple AirPods",
+    "Sony 4K HDR TV", "Canon DSLR Camera", "Roomba Robot Vacuum",
+    "Nikon D", "Bose QuietComfort", "Samsung Soundbar", "Asus ROG",
+    "Bose SoundLink Speaker", "Google Nest", "Garmin Forerunner", "MacBook Pro"
+]
+
+asuntos = [
+    "Product setup", "Peripheral compatibility", "Network problem",
+    "Account access", "Data loss", "Payment issue", "Refund request",
+    "Battery life", "Installation support", "Software bug", "Hardware issue",
+    "Product recommendation", "Delivery problem", "Display issue",
+    "Cancellation request", "Product compatibility"
+]
+
+tipos = [
+    "Technical issue", "Billing inquiry", "Cancellation request",
+    "Product inquiry", "Refund request"
+]
+
 generos = ["Masculino", "Femenino", "No especificar"]
 
 # Streamlit UI para crear un nuevo ticket
@@ -75,6 +101,10 @@ producto = st.selectbox("Producto comprado", productos)
 fecha_compra = st.date_input("Fecha de compra")
 asunto = st.selectbox("Asunto del ticket", asuntos)
 descripcion = st.text_area("Descripción de la solicitud")
+
+# Agregar Ticket Status con valor por defecto
+ticket_status = "Pending Customer Response"  # Valor por defecto para Ticket Status
+
 
 # Botón para enviar la solicitud
 if st.button("Enviar solicitud"):
@@ -104,7 +134,10 @@ if st.button("Enviar solicitud"):
                 "Product Purchased": str(producto),
                 "Date of Purchase": fecha_compra.strftime("%Y-%m-%d"),  
                 "Ticket Subject": str(asunto),
-                "Ticket Description": str(descripcion)  
+                "Ticket Type": str(tipo),  # Agregamos el Ticket Type
+                "Ticket Description": str(descripcion) ,
+                "Ticket Status": ticket_status  # Añadir el Ticket Status
+
             }
         ]
         
