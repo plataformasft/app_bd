@@ -96,14 +96,19 @@ st.subheader("Ingrese su solicitud de soporte")
 nombre = st.text_input("Nombre del cliente")
 genero = st.selectbox("Género", generos)
 email = st.text_input("Correo electrónico")
-edad = st.number_input("Edad del cliente", min_value=0, step=1)
+edad = st.number_input("Edad del cliente", min_value=18, step=1)
 producto = st.selectbox("Producto comprado", productos)
-fecha_compra = st.date_input("Fecha de compra")
+
 asunto = st.selectbox("Asunto del ticket", asuntos)
-descripcion = st.text_area("Descripción de la solicitud")
 
 # Agregar Ticket Status con valor por defecto
 ticket_status = "Pending Customer Response"  # Valor por defecto para Ticket Status
+st.markdown(f"**Estado del Ticket:** {ticket_status}")  # Mostrar el estado del ticket
+
+fecha_compra = st.date_input("Fecha de compra")
+descripcion = st.text_area("Descripción de la solicitud")
+
+
 
 
 # Botón para enviar la solicitud
